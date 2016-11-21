@@ -1,0 +1,19 @@
+{
+  "name": "tellurium",
+  "version": "1.0.0",
+  "description": "## 何をやるか",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyamadori/tellurium.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nyamadori/tellurium/issues"
+  },
+  "homepage": "https://github.com/nyamadori/tellurium#readme"
+}
