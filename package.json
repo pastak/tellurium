@@ -1,0 +1,49 @@
+{
+  "name": "tellurium",
+  "version": "1.0.0",
+  "description": "A system to autocomplete a GUI testing code with user interaction capturing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "install": "typings install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyamadori/tellurium.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nyamadori/tellurium/issues"
+  },
+  "homepage": "https://github.com/nyamadori/tellurium#readme",
+  "devDependencies": {
+    "babel-plugin-espower": "^2.3.1",
+    "eslint": "^3.11.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-flowtype": "^2.28.2",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "eslint-plugin-typescript": "^0.1.0",
+    "json-loader": "^0.5.4",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2",
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^1.2.2",
+    "typescript": "^2.0.10",
+    "typescript-eslint-parser": "^1.0.0",
+    "typings": "^2.0.0",
+    "webpack": "^1.13.3",
+    "webpack-espower-loader": "^1.0.1",
+    "webpack-node-externals": "^1.5.4"
+  },
+  "dependencies": {
+    "@types/express": "^4.0.34",
+    "@types/socket.io": "^1.4.27",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "socket.io": "^1.7.2"
+  }
+}

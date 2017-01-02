@@ -1,0 +1,6 @@
+.DS_Store
+typings
+dist
+node_modules
+app.js
+app.js.map
