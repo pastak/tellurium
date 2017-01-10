@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "A system to autocomplete a GUI testing code with user interaction capturing",
   "main": "index.js",
+  "bin": {
+    "tellurium": "./bin/cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch": "webpack --watch",
-    "install": "typings install"
+    "install": "typings install; npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,8 @@
   },
   "homepage": "https://github.com/nyamadori/tellurium#readme",
   "devDependencies": {
+    "@types/body-parser": "0.0.33",
+    "@types/method-override": "0.0.29",
     "babel-plugin-espower": "^2.3.1",
     "eslint": "^3.11.1",
     "eslint-config-standard": "^6.2.1",
@@ -44,6 +49,7 @@
     "@types/socket.io": "^1.4.27",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "method-override": "^2.3.7",
     "socket.io": "^1.7.2"
   }
 }

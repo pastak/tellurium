@@ -4,12 +4,13 @@ module.exports = {
   target: 'node',
   externals: [nodeExternals()],
   entry: {
-    app: './src/app.ts'
+    index: './src/'
   },
 
   output: {
     path: './',
-    filename: '[name].js'
+    filename: '[name].js',
+    libraryTarget: 'commonjs',
   },
 
   module: {
