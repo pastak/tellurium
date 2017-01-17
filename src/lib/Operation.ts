@@ -4,4 +4,5 @@ export default class Operation {
   type: OperationType
   locator: string
   locatorType: string
+  eventData: any
 }

@@ -1,28 +1,26 @@
 import * as http from 'http'
-import * as socket from 'socket.io'
+import * as socketIO from 'socket.io'
 import * as listeners from './messageListeners'
 
 export default class Server {
-  private _server: http.Server
-  private _ws: SocketIO.Server
+  private _io: SocketIO.Server
 
   constructor () {
-    this._server = http.createServer()
-    this._ws = socket(this._server)
-    this._ws.on('connection', (socket) => {
+    this._io = socketIO()
+    this._io.on('connection', (socket) => {
       for (const name in listeners) {
-        socket.on(name, (data) => {
-          listeners[name].call(this, this._ws, data)
+        socket.on(name, (data, ack) => {
+          listeners[name].call(this, this._io, data, ack)
         })
       }
     })
   }
 
-  get ws () {
-    return this._ws
+  get io () {
+    return this._io
   }
 
-  run (port: number, cb?: Function) {
-    this._server.listen(port, cb)
+  listen () {
+    this._io.listen(9000)
   }
 }
