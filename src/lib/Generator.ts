@@ -1,43 +1,34 @@
-import Operation from './Operation'
-import capybaraGenerator from '../generators/capybara'
+import * as event from 'eventemitter2'
+import * as Rx from 'rxjs/Rx'
+import LanguageGenerator from './LanguageGenerator'
 
-type GeneratorFunc = (ope: Operation) => string
-type GeneratorFuncMap = { [opeType: string]: GeneratorFunc }
+type Constructor = new(...args: any[]) => any
 
-class Generator {
-  private _generatorFuncs: GeneratorFuncMap
+export default class Generator {
+  options: {}
 
-  constructor (generatorFuncs: GeneratorFuncMap) {
-    this._generatorFuncs = generatorFuncs
+  constructor (options) {
+    this.options = options
   }
 
-  generate (operations: Operation[]): string {
-    var code = ''
-
-    for (const ope of operations) {
-      const line = `${this._generatorFuncs[ope.type](ope)}\n`
-      code = code.concat(line)
-    }
-
-    return code
+  generate (operation) {
+    return this[operation.type](operation.event)
   }
 
-  private static _generators: { [generatorName: string]: Generator }
+  private static generators: { [generatorName: string]: Constructor }
 
   static initialize () {
-    this._generators = {}
+    this.generators = {}
   }
 
-  static register (name: string, generatorFuncs: GeneratorFuncMap) {
-    this._generators[name] = new Generator(generatorFuncs)
+  static register (name: string, generator: Constructor) {
+    this.generators[name] = generator
   }
 
-  static get (name: string) {
-    return this._generators[name]
+  static get (name: string, opts: {}): Generator {
+    const ctor = this.generators[name]
+    return new ctor(opts)
   }
 }
 
 Generator.initialize()
-Generator.register('capybara', capybaraGenerator)
-
-export default Generator

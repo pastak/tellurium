@@ -1,25 +1,59 @@
-import Session from './Session'
+import * as minimatch from 'minimatch'
 import * as requests from './requests'
 import Generator from './Generator'
+import EventStream from './EventStream'
 
-export function createSession (socket, data: requests.CreateSession, ack) {
-  const session = new Session(data.generator)
-  session.save()
-  socket.emit('startCapture', { sessionId: session.id })
+const eventStream = new EventStream
+const targets = {}
 
-  ack({ message: 'success', sessionId: session.id })
+export function createSession (socket, data) {
+  const configFile = data.configFile
+  const config = data.config
+  var target = targets[configFile]
+
+  if (!target) {
+    const generator = Generator.get(config.generator.name, config.generator.options)
+
+    target = targets[configFile] = {
+      config: config,
+      generator: generator
+    }
+
+    eventStream.on('operation', (ope) => {
+      socket.emit('complete', { code: generator.generate(ope) })
+    })
+
+    console.log(target)
+  }
 }
 
 export function destroySession (socket, data) {
-  console.log(data, Session.all)
-  const session = Session.find(data.sessionId)
-  const code = session.generate()
+  // console.log(data, Session.all)
+  // const session = Session.find(data.sessionId)
+  // const code = session.generate()
 
-  socket.emit('complete', { message: 'complete', code: code })
+  // socket.emit('complete', { message: 'complete', code: code })
 }
 
-export function createOperation (socket, data) {
-  const session = Session.find(data.sessionId)
-  session.operations.push(data.operation)
-  console.log(data) // 操作データを蓄積
+export function detectEvent (socket, data) {
+  var matchedTarget = null
+
+  for (const configFile in targets) {
+    const target = targets[configFile]
+
+    if (minimatch(data.url, target.config.url)) {
+      matchedTarget = targets[configFile]
+      break
+    }
+  }
+
+  if (matchedTarget) {
+    eventStream.push(data.event)
+  } else {
+    console.log('no target: ', data.event)
+  }
+}
+
+export function recordingStarted (socket, data) {
+  console.log(data)
 }

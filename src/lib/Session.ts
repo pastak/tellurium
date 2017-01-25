@@ -23,10 +23,6 @@ export default class Session {
     return this._id
   }
 
-  generate () {
-    return this.generator.generate(this.operations)
-  }
-
   save () {
     Session.add(this)
   }
