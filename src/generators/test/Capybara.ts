@@ -10,12 +10,27 @@ export default class CapybaraGenerator extends Generator {
     this.lang = new RubyGenerator(opts['ruby'])
   }
 
-  click (event) {
-    return this.lang.method('click_on', {}, event.locator.value)
+  click (event, locator) {
+    var call = 'click_on'
+    var loc
+
+    switch (event.target.tagName) {
+      case 'a':
+        call = 'click_link'
+        loc = locator('id', 'linkText')
+        break
+      case 'button':
+      case 'input':
+        call = 'click_button'
+        loc = locator('id', 'value')
+        break
+    }
+
+    return this.lang.method(call, {}, loc)
   }
 
-  fillIn (event) {
-    return this.lang.method('fill_in', { with: event.value }, event.locator.value)
+  fillIn (event, locator) {
+    return this.lang.method('fill_in', { with: event.target.value }, locator('id', 'value'))
   }
 }
 

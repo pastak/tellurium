@@ -47,11 +47,7 @@ export function detectEvent (socket, data) {
     }
   }
 
-  if (matchedTarget) {
-    eventStream.push(data.event)
-  } else {
-    console.log('no target: ', data.event)
-  }
+  if (matchedTarget) eventStream.push(data.event)
 }
 
 export function recordingStarted (socket, data) {
