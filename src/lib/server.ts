@@ -21,6 +21,6 @@ export default class Server {
   }
 
   listen () {
-    this._io.listen(9000)
+    this._io.listen(10000)
   }
 }

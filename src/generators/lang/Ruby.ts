@@ -21,7 +21,13 @@ export default class RubyGenerator extends LanguageGenerator {
   }
 
   arg (value) {
-    const type = typeof value
+    console.log('arg', value)
+    var type = typeof value
+
+    if (type === 'object' && value.rubyType) {
+      type = value.rubyType
+    }
+
     return this[`${type}Literal`](value)
   }
 
@@ -46,5 +52,13 @@ export default class RubyGenerator extends LanguageGenerator {
 
   numberLiteral (value) {
     return value
+  }
+
+  symbolValue (label) {
+    return { rubyType: 'symbol', label: label }
+  }
+
+  symbolLiteral (symbol) {
+    return `:${symbol.label}`
   }
 }

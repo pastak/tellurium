@@ -1,5 +1,5 @@
 import Server from './lib/Server'
-import './generators/test/Capybara'
+import './generators/operation/Capybara'
 import EventStream from './lib/EventStream'
 
 export default {

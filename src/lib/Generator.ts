@@ -11,19 +11,12 @@ export default class Generator {
     this.options = options
   }
 
-  generate (operation) {
-    if (!this[operation.type]) {
-      console.error('Unknown operation:', operation)
+  generate (event) {
+    if (!this[event.type]) {
+      console.error('Unknown operation:', event)
       return
     }
-    return this[operation.type](operation.event, this.locator.bind(this, operation.event.locators))
-  }
-
-  locator (locators, ...types: string[]) {
-    const availableType = types.find((type) => locators[type])
-    const locator = locators[availableType]
-
-    return locator.value
+    return this[event.type](event)
   }
 
   private static generators: { [generatorName: string]: Constructor }

@@ -22,22 +22,25 @@ export default class EventStream extends event.EventEmitter2 {
     const clicks = Rx.Observable.fromEvent(this.eventEmitter, 'click')
     const changes = Rx.Observable.fromEvent(this.eventEmitter, 'change')
 
-    clicks
-      .buffer(clicks.debounceTime(300))
-      .groupBy((clicks) => clicks.length)
-      .subscribe((observable) => {
-        const clicksCount = observable.key
-        if (clicksCount === 1) {
-          observable.map((clicks) => clicks[0]).subscribe((event) => {
-            this.emitOperation('click', event)
-          })
-        } else {
-          observable.map((clicks) => clicks[0]).subscribe((event) => {
-            this.emitOperation('doubleClick', event)
-          })
-        }
-      })
+    // clicks
+    //   .buffer(clicks.debounceTime(300))
+    //   .groupBy((clicks) => clicks.length)
+    //   .subscribe((observable) => {
+    //     const clicksCount = observable.key
+    //     if (clicksCount === 1) {
+    //       observable.map((clicks) => clicks[0]).subscribe((event) => {
+    //         this.emitOperation('click', event)
+    //       })
+    //     } else {
+    //       observable.map((clicks) => clicks[0]).subscribe((event) => {
+    //         this.emitOperation('doubleClick', event)
+    //       })
+    //     }
+    //   })
 
+    clicks.subscribe((event) => {
+      this.emitOperation('click', event)
+    })
     changes.subscribe((event) => {
       this.emitOperation('fillIn', event)
     })

@@ -20,7 +20,8 @@
   },
 
   "filesGlob": [
-    "./**/*.ts",
+    "./lib/**/*.ts",
+    "./generators/**/*.ts",
     "!./node_modules/**/*.ts"
   ],
 

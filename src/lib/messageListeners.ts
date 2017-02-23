@@ -1,9 +1,9 @@
 import * as minimatch from 'minimatch'
 import * as requests from './requests'
 import Generator from './Generator'
-import EventStream from './EventStream'
+// import EventStream from './EventStream'
 
-const eventStream = new EventStream
+// const eventStream = new EventStream
 const targets = {}
 
 export function createSession (socket, data) {
@@ -18,10 +18,6 @@ export function createSession (socket, data) {
       config: config,
       generator: generator
     }
-
-    eventStream.on('operation', (ope) => {
-      socket.emit('complete', { code: generator.generate(ope) })
-    })
 
     console.log(target)
   }
@@ -47,7 +43,11 @@ export function detectEvent (socket, data) {
     }
   }
 
-  if (matchedTarget) eventStream.push(data.event)
+  console.log(data)
+
+  if (matchedTarget) {
+    socket.emit('complete', { code: matchedTarget.generator.generate(data.event) })
+  }
 }
 
 export function recordingStarted (socket, data) {
