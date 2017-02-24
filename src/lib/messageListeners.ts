@@ -11,7 +11,7 @@ export function createSession (socket, data) {
   const config = data.config
   var target = targets[configFile]
 
-  if (!target) {
+  if (!target || (target && target.config !== data.config)) {
     const generator = Generator.get(config.generator.name, config.generator.options)
 
     target = targets[configFile] = {
@@ -46,7 +46,7 @@ export function detectEvent (socket, data) {
   console.log(data)
 
   if (matchedTarget) {
-    socket.emit('complete', { code: matchedTarget.generator.generate(data.event) })
+    socket.emit('complete', { code: matchedTarget.generator.generate(data.event), url: data.url })
   }
 }
 
