@@ -36,6 +36,7 @@ Tellurium は、Editor Plugin、Telluirum Server、Browser Plugin から構成�
 ## 補完設定ファイル
 
 設定ファイルは、補完に関する設定を記述する JSON ファイルです。
+`.tellurium` という名前のファイルを設定として認識します。
 以下に例を示します。
 
 ``` json
