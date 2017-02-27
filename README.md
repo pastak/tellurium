@@ -21,9 +21,17 @@ Tellurium は、Editor Plugin、Telluirum Server、Browser Plugin から構成�
 
 ## Tellurium のセットアップ
 
-1. [Chrome Tellurium](https://github.com/tellurium-project/chrome-tellurium) をセットアップ（手順はリポジトリに記載）
-2. [Atom Tellurium](https://github.com/tellurium-project/atom-tellurium) をセットアップ（手順はリポジトリに記載）
-3. [Tellurium Server](https://github.com/tellurium-project/tellurium) をセットアップ（本リポジトリに後述）
+1. [Chrome Tellurium](https://github.com/tellurium-project/chrome-tellurium) をセットアップ
+  1. `$ cd ./chrome-tellurium`
+  2. `$ npm run build`
+  3. Google Chrome で拡張機能をインストール
+2. [Atom Tellurium](https://github.com/tellurium-project/atom-tellurium) をセットアップ
+  1. `$ cd ./atom-tellurium`
+  2. `$ apm link`
+3. [Tellurium Server](https://github.com/tellurium-project/tellurium) をセットアップ
+  1. `$ npm install`
+  2. `$ npm run build`
+  3. `$ npm link`
 
 ## 使い方
 
