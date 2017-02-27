@@ -12,7 +12,7 @@ Tellurium は、Editor Plugin、Telluirum Server、Browser Plugin から構成�
 キャプチャしたイベントを Tellurium Server でテストコード片に変換、
 変換したコード片は、Editor Plugin が受け取り、エディタの編集領域に補完する、という流れです。
 
-![](doc/system.png)
+<img src="doc/system.png" width="400">
 
 各モジュールは、以下のリポジトリに分割しています。
 * [Tellurium Server](https://github.com/tellurium-project/chrome-tellurium)
