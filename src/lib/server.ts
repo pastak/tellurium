@@ -2,7 +2,7 @@ import * as http from 'http'
 import * as socketIO from 'socket.io'
 import * as listeners from './messageListeners'
 
-export default class Server {
+class Server {
   private _io: SocketIO.Server
 
   constructor () {
@@ -24,3 +24,5 @@ export default class Server {
     this._io.listen(10000)
   }
 }
+
+export {Server}
