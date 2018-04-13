@@ -6,6 +6,9 @@
     "noImplicitUseStrict": false,
     "sourceMap": true
   },
+  "include": {
+    "typings/index.d.ts"
+  },
 
   "exclude": [
     "node_modules",

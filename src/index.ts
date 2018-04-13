@@ -1,7 +1,5 @@
-import Server from './lib/Server'
+import Server from './lib/server'
 import './generators/operation/Capybara'
 import EventStream from './lib/EventStream'
 
-export default {
-  Server: Server
-}
+export const Server = Server;
